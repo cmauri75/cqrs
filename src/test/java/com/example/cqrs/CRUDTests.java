@@ -1,8 +1,8 @@
 package com.example.cqrs;
 
-import com.example.cqrs.model.Address;
-import com.example.cqrs.model.Contact;
-import com.example.cqrs.service.UserService;
+import com.example.cqrs.crud.model.Address;
+import com.example.cqrs.crud.model.Contact;
+import com.example.cqrs.crud.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Slf4j
-class CqrsApplicationTests {
+class CRUDTests {
 
     @Autowired
     UserService userService;
 
     @Test
-    void contextLoads() {
-    }
-
-    @Test
     public void testCRUD() {
         String userId = UUID.randomUUID().toString();
-        log.debug("Testing {}",userId);
+        log.debug("Testing {}", userId);
 
+        //**** write part
         userService.createUser(userId, "Cesare", "Mauri");
 
         Set<Contact> contacts = new HashSet<>();
@@ -41,8 +38,17 @@ class CqrsApplicationTests {
 
         userService.updateUser(userId, contacts, addresses);
 
+        //*** Read part
         var cont = userService.getContactByType(userId, "Fun");
-        assertEquals(cont.size(), 0);
+        assertEquals(0,cont.size());
+
+        var cont2 = userService.getContactByType(userId, "Home");
+        assertEquals(1,cont2.size());
+        assertEquals(cont2.toArray()[0],Contact.builder().type("Home").detail("Phone").build());
+
+        var cont3 = userService.getAddressByRegion(userId, "IT");
+        assertEquals(1,cont3.size());
+        assertEquals(cont3.toArray()[0],Address.builder().city("Lomagna").state("IT").postcode("23871").build());
 
     }
 }

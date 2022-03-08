@@ -1,4 +1,4 @@
-package com.example.cqrs.model;
+package com.example.cqrs.cqrs.write.model;
 
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +13,4 @@ public class User {
     private String lastName;
     private Set<Contact> contacts;
     private Set<Address> addresses;
-
 }

@@ -1,4 +1,4 @@
-package com.example.cqrs.model;
+package com.example.cqrs.crud.model;
 
 import lombok.Builder;
 import lombok.Data;

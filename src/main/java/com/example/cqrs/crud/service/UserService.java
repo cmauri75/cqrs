@@ -1,7 +1,9 @@
-package com.example.cqrs.service;
+package com.example.cqrs.crud.service;
 
-import com.example.cqrs.model.*;
-import com.example.cqrs.repository.UserRepository;
+import com.example.cqrs.crud.model.Address;
+import com.example.cqrs.crud.model.Contact;
+import com.example.cqrs.crud.model.User;
+import com.example.cqrs.crud.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

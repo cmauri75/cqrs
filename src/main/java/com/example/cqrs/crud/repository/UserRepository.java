@@ -1,6 +1,6 @@
-package com.example.cqrs.repository;
+package com.example.cqrs.crud.repository;
 
-import com.example.cqrs.model.User;
+import com.example.cqrs.crud.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
