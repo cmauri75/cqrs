@@ -19,8 +19,7 @@ public class UserService {
     private final UserRepository repository;
 
     public void createUser(String userId, String firstName, String lastName) {
-        User user = User.builder().userid(userId).firstName(firstName).lastName(lastName).build();
-        repository.addUser(userId, user);
+        repository.addUser(userId, User.builder().userid(userId).firstName(firstName).lastName(lastName).build());
     }
 
     public void updateUser(String userId, Set<Contact> contacts, Set<Address> addresses) {

@@ -1,6 +1,6 @@
 package com.example.cqrs.cqrs.read.model;
 
-import com.example.cqrs.cqrs.write.model.Address;
+import com.example.cqrs.crud.model.Address;
 import lombok.Data;
 
 import java.util.HashMap;

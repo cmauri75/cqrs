@@ -2,7 +2,7 @@ package com.example.cqrs.cqrs.write.aggregate;
 
 import com.example.cqrs.cqrs.write.command.CreateUserCommand;
 import com.example.cqrs.cqrs.write.command.UpdateUserCommand;
-import com.example.cqrs.cqrs.write.model.User;
+import com.example.cqrs.crud.model.User;
 import com.example.cqrs.cqrs.write.repository.UserWriteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

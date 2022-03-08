@@ -1,15 +1,14 @@
 package com.example.cqrs;
 
-import com.example.cqrs.cqrs.projector.UserProjector;
+import com.example.cqrs.cqrs.projector.UserProjectorEvent;
 import com.example.cqrs.cqrs.read.projection.UserProjection;
 import com.example.cqrs.cqrs.read.query.AddressByRegionQuery;
 import com.example.cqrs.cqrs.read.query.ContactByTypeQuery;
-import com.example.cqrs.cqrs.write.aggregate.UserAggregate;
+import com.example.cqrs.cqrs.write.aggregate.UserAggregateEvents;
 import com.example.cqrs.cqrs.write.command.CreateUserCommand;
 import com.example.cqrs.cqrs.write.command.UpdateUserCommand;
 import com.example.cqrs.crud.model.Address;
 import com.example.cqrs.crud.model.Contact;
-import com.example.cqrs.crud.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Slf4j
-class CQRSTests {
+class CQRSEventTests {
 
     @Autowired
-    UserAggregate userAggregate;
+    UserAggregateEvents userAggregate;
 
     @Autowired
     UserProjection userProjection;
 
     @Autowired
-    UserProjector userProjector;
+    UserProjectorEvent userProjector;
 
     @Test
     public void testCQRS() {
@@ -42,8 +41,7 @@ class CQRSTests {
         //**** Write part
         //Create user and align read
         CreateUserCommand createUserCommand = CreateUserCommand.builder().userId(userId).firstName("Cesare").lastName("Mauri").build();
-        User user = userAggregate.handleCreateUserCommand(createUserCommand);
-        userProjector.project(user);
+        userAggregate.handleCreateUserCommand(createUserCommand);
 
         Set<Contact> contacts = new HashSet<>();
         contacts.add(Contact.builder().type("Home").detail("Phone").build());
@@ -54,8 +52,8 @@ class CQRSTests {
 
         //Add contacts and addresses and align read
         UpdateUserCommand updateUserCommand = UpdateUserCommand.builder().userId(userId).addresses(addresses).contacts(contacts).build();
-        user = userAggregate.handleUpdateUserCommand(updateUserCommand);
-        userProjector.project(user);
+        var userEvents = userAggregate.handleUpdateUserCommand(updateUserCommand);
+        userProjector.project(userId, userEvents);
 
 
         //****** Read Part

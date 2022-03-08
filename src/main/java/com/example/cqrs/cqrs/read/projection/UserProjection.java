@@ -5,8 +5,8 @@ import com.example.cqrs.cqrs.read.model.UserContact;
 import com.example.cqrs.cqrs.read.query.AddressByRegionQuery;
 import com.example.cqrs.cqrs.read.query.ContactByTypeQuery;
 import com.example.cqrs.cqrs.read.repository.UserReadRepository;
-import com.example.cqrs.cqrs.write.model.Address;
-import com.example.cqrs.cqrs.write.model.Contact;
+import com.example.cqrs.crud.model.Address;
+import com.example.cqrs.crud.model.Contact;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
