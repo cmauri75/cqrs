@@ -45,10 +45,8 @@ public class UserProjectorEvent {
         Address address = Address.builder().city(event.getCity()).state(event.getState()).postcode(event.getPostCode()).build();
         UserAddress userAddress = readRepository.getUserAddress(userId);
         if (userAddress != null) {
-            Set<Address> addresses = userAddress.getAddressByRegion()
-                    .get(address.getState());
-            if (addresses != null)
-                addresses.remove(address);
+            Set<Address> addresses = userAddress.getAddressByRegion().get(address.getState());
+            if (addresses != null) addresses.remove(address);
             readRepository.addUserAddress(userId, userAddress);
         }
     }
@@ -67,8 +65,7 @@ public class UserProjectorEvent {
         UserContact userContact = readRepository.getUserContact(userId);
         if (userContact != null) {
             Set<Contact> contacts = userContact.getContactByType().get(contact.getType());
-            if (contacts != null)
-                contacts.remove(contact);
+            if (contacts != null) contacts.remove(contact);
             readRepository.addUserContact(userId, userContact);
         }
     }

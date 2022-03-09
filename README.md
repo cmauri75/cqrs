@@ -57,7 +57,7 @@ However, as the write and read models get more complex, it'll get increasingly d
 
 ## CQRS and Event Sourcing
 ![](images/ES-CQRS-Application.jpg)
-
+Read is same, write now uses events and projector became more simple to implement, just apply events instead of interpreter state.
 
 # Reference
 Based on [baeldung article](https://www.baeldung.com/cqrs-event-sourcing-java) one of best reference for Java ecosystem

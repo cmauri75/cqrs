@@ -70,7 +70,6 @@ public class UserAggregateEvents {
             writeRepository.addEvent(command.getUserId(), addressAddedEvent);
         }
 
-
         return events;
     }
 }
